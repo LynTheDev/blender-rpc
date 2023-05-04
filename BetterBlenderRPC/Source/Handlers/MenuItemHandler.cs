@@ -33,7 +33,8 @@ public static class Handler
     }
 
     public static void PerformCheck_Tick(object sender, EventArgs e)
-    { 
-        Blender.UpdateBlender();
+    {
+        if (Discord.ClientExists())
+            Blender.UpdateBlender();
     }
 }

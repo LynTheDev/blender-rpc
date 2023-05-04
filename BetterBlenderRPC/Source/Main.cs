@@ -14,7 +14,7 @@ public static class RPC
 
     public static Timer PerformCheck;
 
-    public static void Main(string[] args)
+    public static void Main()
     {
         Discord.Initialise();
 
@@ -27,7 +27,7 @@ public static class RPC
         // Setting up timer
         PerformCheck = new Timer()
         {
-            Interval = 15000,
+            Interval = 10000,
         };
 
         PerformCheck.Tick += Handler.PerformCheck_Tick;

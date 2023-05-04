@@ -6,14 +6,12 @@ public static class Discord
 {
     private static DiscordRpcClient client;
     private static string state;
-    public static bool isOn = false;
 
     public static void Initialise()
     {
         client = new DiscordRpcClient(Secret.ClientID);
 
         client.Initialize();
-        isOn = true;
 
         SetDefaultPresence();
     }
@@ -25,7 +23,8 @@ public static class Discord
 
     public static void Clear()
     {
-        client.ClearPresence();
+        if (client.CurrentPresence != null)
+            client.ClearPresence();
     }
 
     public static void SetDefaultPresence()
@@ -43,25 +42,33 @@ public static class Discord
                 var stateName = arrayOfNames[arrayOfNames.Length - 1];
                 state = stateName.Remove(stateName.Length - 1);
             }
-        }
-        else
-            state = "Not in a project.";
 
-        client.SetPresence(new RichPresence()
-        {
-            Details = "Modeling..",
-            State = state,
-            Assets = new Assets()
+            client.SetPresence(new RichPresence()
             {
-                LargeImageKey = "blender_logo",
-                LargeImageText = "Blender RPC (Non Official)",
-            }
-        });
+                Details = "Modeling..",
+                State = state,
+                Assets = new Assets()
+                {
+                    LargeImageKey = "blender_logo",
+                    LargeImageText = "Blender RPC (Non Official)",
+                }
+            });
+        }
+    }
+
+    public static bool ClientExists()
+    {
+        if (client.CurrentPresence == null)
+        {
+            SetDefaultPresence();
+            return false;
+        }
+
+        return true;
     }
 
     public static void Kill()
     {
-        isOn = false;
         client.Dispose();
     }
 }

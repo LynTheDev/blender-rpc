@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace BetterBlenderRPC.Source.Utils;
 
@@ -50,8 +45,6 @@ public static class Blender
                 Discord.StateUpdate(stateName.Remove(stateName.Length - 1));
         }
         else
-        {
-            Discord.StateUpdate("Not in a project.");
-        }
+            Discord.Clear();
     }
 }
