@@ -1,0 +1,12 @@
+# IDE stuff no one cares about
+
+.vs/
+.vscode/
+.idea/
+
+# Debug
+BetterBlenderRPC/bin/
+BetterBlenderRPC/obj/
+
+# File that holds the clientID
+BetterBlenderRPC/Source/Secret.cs
